@@ -297,7 +297,7 @@ def display(df):
     Args:
         df - Pandas DataFrame containing city data filtered by month and day
     Returns:
-        df - Rows of the panda's dataframe in clusters of 5
+        df - Rows of the panda's dataframe in clusters of 5 until the user asks to stop
     """
     view_data = input('\nWould you like to view 5 rows of individual trip data? Please type yes to confirm or no to refuse: ').lower()
     start_loc = 0
