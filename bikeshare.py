@@ -299,14 +299,22 @@ def display(df):
     Returns:
         df - Rows of the panda's dataframe in clusters of 5 until the user asks to stop
     """
-    view_data = input('\nWould you like to view 5 rows of individual trip data? Please type yes to confirm or no to refuse: ').lower()
+    view_data = ''
     start_loc = 0
-    while view_data == 'yes':
-        print(df.iloc[start_loc:(start_loc + 5)])
-        start_loc += 5
-        view_data = input('\nDo you wish to see 5 more rows?  Please type yes to confirm or no to refuse: ')
-        if view_data == 'no':
-            break
+    while view_data != 'no':
+        view_data = input('\nWould you like to view 5 rows of individual trip data? Please type yes to confirm or no to refuse: ').lower()
+        if view_data == 'yes':
+            while view_data == 'yes':
+                print(df.iloc[start_loc:(start_loc + 5)])
+                start_loc += 5
+                view_data = input('\nDo you wish to see 5 more rows?  Please type yes to confirm or no to refuse: ')
+                if view_data == 'no':
+                    break
+                elif view_data != ('yes' and 'no'):
+                    print("\nYour input isn't valid, please try again")
+        elif view_data != ('yes' and 'no'):
+            print("\nYour input isn't valid, please try again")
+            continue            
 
 def main():
     while True:
