@@ -48,7 +48,7 @@ def get_started():
         (df) df - Pandas Dataframe containing city data filtered by month and day
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    # get user input for city (chicago, new york city, washington).
 
     icity = ''
     while icity != 'ch' and icity != 'ny' and icity != 'wa':
@@ -135,9 +135,11 @@ def station_stats(df):
     # display most commonly used start station
     modestartstation = df['Start Station'].mode()[0]
     print('The most common Start Sation is: {}'.format(modestartstation))
+
     # display most commonly used end station
     modeendstation = df['End Station'].mode()[0]
     print('The most common End Sation is: {}'.format(modeendstation))
+
     # display most frequent combination of start station and end station trip
     df['Trip'] = 'from ' + df['Start Station'] + ' to ' + df['End Station']
     modetrip = df['Trip'].mode()[0]
@@ -159,6 +161,7 @@ def trip_duration_stats(df):
     seconds = (totaltriptime - hour * 3600 - minutes * 60)
     converted_totaltriptime = "{} hours {} minutes and {} seconds".format(hour, minutes, seconds)
     print('The total trip time is: {}'.format(converted_totaltriptime))
+
     # display mean travel time
     meantriptime = df['Trip Duration'].mean().mean()
     hour2 = totaltriptime // 3600
@@ -179,9 +182,11 @@ def user_stats(df):
     # Display counts of user types
     countusertypes = df['User Type'].value_counts()
     print(countusertypes)
+
     # Display counts of gender
     countgendertypes = df['Gender'].value_counts()
     print(countgendertypes)
+
     # Display earliest, most recent, and most common year of birth
     oldestclients = int(df['Birth Year'].min())
     youngestclients = int(df['Birth Year'].max())
