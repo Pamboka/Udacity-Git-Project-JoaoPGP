@@ -204,6 +204,8 @@ def display(df):
     """
     view_data = ''
     start_loc = 0
+    dfrows = df.shape[0]
+    pd.set_option('display.max_columns',dfrows)
     while view_data != 'no':
         view_data = input('\nWould you like to view 5 rows of individual trip data? Please type yes to confirm or no to refuse: ').lower()
         if view_data == 'yes':
