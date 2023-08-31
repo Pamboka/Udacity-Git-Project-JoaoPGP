@@ -24,6 +24,13 @@ MONTHS_NAME = { 'ja': 'January',
                 'my': 'May',
                 'ju': 'June' }
 
+MONTHS_NUMBER = { 1: 'January',
+                  2: 'February',
+                  3: 'March',
+                  4: 'April',
+                  5: 'May',
+                  6: 'June' }
+
 DAYS_DATA = { 'su': 'Sunday',
               'mo': 'Monday',
               'tu': 'Tuesday',
@@ -104,26 +111,18 @@ def time_stats(df):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
     months = pd.Series(df['Month'])
+
     # display the most common month
     modemonth = months.mode()[0]
-    if modemonth == 1:
-        print('The most common month is: January')
-    elif modemonth == 2:
-        print('The most common month is: February')
-    elif modemonth == 3:
-        print('The most common month is: March')
-    elif modemonth == 4:
-        print('The most common month is: April')
-    elif modemonth == 5:
-        print('The most common month is: May')
-    elif modemonth == 6:
-        print('The most common month is: June')
+    print('The most common month of travel is: {}'.format(MONTHS_NUMBER[modemonth]))
+
     # display the most common day of week
-    modeweekday = df['day_of_week'].mode()
+    modeweekday = df['day_of_week'].mode()[1]
     print('The most common weekday is: {}'.format(modeweekday))
+
     # display the most common start hour
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    hourmode = df['Start Time'].dt.hour.mode()
+    hourmode = df['Start Time'].dt.hour.mode()[1]
     print('The most common hour is: {}'.format(hourmode))
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
