@@ -186,9 +186,9 @@ def user_stats(df):
     countgendertypes = df['Gender'].value_counts()
     print(countgendertypes)
     # Display earliest, most recent, and most common year of birth
-    oldestclients = df['Birth Year'].min()
-    youngestclients = df['Birth Year'].max()
-    modeclients = df['Birth Year'].mode()
+    oldestclients = int(df['Birth Year'].min())
+    youngestclients = int(df['Birth Year'].max())
+    modeclients = int(df['Birth Year'].mode())
     print('The earliest year of birth we have among our clients is: {}'.format(oldestclients))
     print('The latest year of birth we have among our clients is: {}'.format(youngestclients))
     print('The most common year of birth we have among our clients is: {}'.format(modeclients))
