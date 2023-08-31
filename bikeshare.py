@@ -74,12 +74,12 @@ def get_started():
             continue    
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    df['day_of_week'] = df['Start Time'].dt.day_name()
 
     iday = ''
     while iday != 'all' and iday != 'su' and iday != 'mo' and iday != 'tu' and iday != 'we' and iday != 'th' and iday != 'fr' and iday != 'sa':
         iday = input("\nSelect which day you'd like to see data for. Type 'Su' for Sunday, 'Mo' for Monday, 'Tu' for Tuesday, 'We' for Wednesday, 'Th' for Thursday, 'Fr' for Friday and 'Sa' for Saturday. If you'd like to see the data for all the days type 'All' (Please only type the letters, ex: All): ").lower()
-        if iday == 'su' and iday == 'mo' and iday == 'tu' and iday == 'we' and iday == 'th' and iday == 'fr' and iday == 'sa':
+        if iday == 'su' or iday == 'mo' or iday == 'tu' or iday == 'we' or iday == 'th' or iday == 'fr' or iday == 'sa':
             df = df[(df['day_of_week'] == DAYS_DATA[iday])]
             print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
             break
