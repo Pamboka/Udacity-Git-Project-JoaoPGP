@@ -43,26 +43,14 @@ def get_started():
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
 
-    icity = input("Select which city you'd like to analyze. Type 'Ch' for Chicago, 'Ny' for New York City and 'Wa' for Washington. (Please only type the letters, ex: Ch): ").lower()
-
-    if icity == 'ch':
-        df = pd.read_csv(CITY_DATA[icity],sep=',')
-    elif icity == 'ny':
-        df = pd.read_csv(CITY_DATA[icity],sep=',')
-    elif icity == 'wa':
-        df = pd.read_csv(CITY_DATA[icity],sep=',')
-    else:
-        while icity != ('ch' and 'ny' and 'wa'):
+    icity = ''
+    while icity != 'ch' and icity != 'ny' and icity != 'wa':
+        icity = input("Select which city you'd like to analyze. Type 'Ch' for Chicago, 'Ny' for New York City and 'Wa' for Washington. (Please only type the letters, ex: Ch): ").lower()
+        if icity == 'ch' or icity == 'ny' or icity == 'wa':
+            break
+        else:
             print("\nYour input isn't valid, please try again")
-            icity = input("\nSelect which city you'd like to analyze. Type 'Ch' for Chicago, 'Ny' for New York City and 'Wa' for Washington. (Please only type the letters, ex: Ch): ").lower()
-            if icity == 'ch':
-                break
-            elif icity == 'ny':
-                break
-            elif icity == 'wa':
-                break
-            else:
-                continue
+            continue
 
     df = pd.read_csv(CITY_DATA[icity],sep=',')
     print("Thank you for your input, the city selected is: {}".format(CITY_NAME[icity]))
@@ -70,122 +58,37 @@ def get_started():
     # get user input for month (all, january, february, ... , june)
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['Month'] = df['Start Time'].dt.month
-    imonth = input("\nSelect which month you'd like to see the data for. Type 'Ja' for January, 'Fe' for February, 'Ma' for March, 'Ap' for April, 'My' for May and 'Ju' for June. If you'd like to see the data for all the months type 'All' . (Please only type the letters, ex: Ju): ").lower()
 
-    if imonth == 'all':
-        df = df
-        print("\nThank you for your input, all months were selected")
-    elif imonth == 'ja':
-        df = df[(df['Month'] == 1)]
-        print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-    elif imonth == 'fe':
-        df = df[(df['Month'] == 2)]
-        print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-    elif imonth == 'ma':
-        df = df[(df['Month'] == 3)]
-        print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-    elif imonth == 'ap':
-        df = df[(df['Month'] == 4)]
-        print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-    elif imonth == 'my':
-        df = df[(df['Month'] == 5)]
-        print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-    elif imonth == 'ju':
-        df = df[(df['Month'] == 6)]
-        print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-    else:
-        while imonth != ('all' and 'ja' and 'fe' and 'ma' and 'ap' and 'my' and 'ju'):
+    imonth = ''
+    while imonth != 'all' and imonth != 'ja' and imonth != 'fe' and imonth != 'ma' and imonth != 'ap' and imonth != 'my' and imonth != 'ju':
+        imonth = input("\nSelect which month you'd like to see the data for. Type 'Ja' for January, 'Fe' for February, 'Ma' for March, 'Ap' for April, 'My' for May and 'Ju' for June. If you'd like to see the data for all the months type 'All' . (Please only type the letters, ex: Ju): ").lower()
+        if imonth == 'ja' or imonth == 'fe' or imonth == 'ma' or imonth == 'ap' or imonth == 'my' or imonth == 'ju':
+            df = df[(df['Month'] == MONTHS_DATA[imonth])]
+            print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
+            break
+        elif imonth == 'all':
+            df = df
+            print("\nThank you for your input, all months were selected!")
+        else:
             print("\nYour input isn't valid, please try again")
-            imonth = input("\nSelect which month you'd like to see the data for. Type 'Ja' for January, 'Fe' for February, 'Ma' for March, 'Ap' for April, 'My' for May and 'Ju' for June. If you'd like to see the data for all the months type 'All' . (Please only type the letters, ex: Ju): ").lower()
-            if imonth == 'all':
-                df = df
-                print("\nThank you for your input, all months were selected")
-                break
-            elif imonth == 'ja':
-                df = df[(df['Month'] == 1)]
-                print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-                break
-            elif imonth == 'fe':
-                df = df[(df['Month'] == 2)]
-                print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-                break
-            elif imonth == 'ma':
-                df = df[(df['Month'] == 3)]
-                print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-                break
-            elif imonth == 'ap':
-                df = df[(df['Month'] == 4)]
-                print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-                break
-            elif imonth == 'my':
-                df = df[(df['Month'] == 5)]
-                print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-                break
-            elif imonth == 'ju':
-                df = df[(df['Month'] == 6)]
-                print("\nThank you for your imput, the month selected was: {}".format(MONTHS_NAME[imonth]))
-                break
-
-
+            continue    
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     df['day_of_week'] = df['Start Time'].dt.weekday_name
-    iday = input("\nSelect which day you'd like to see data for. Type 'Su' for Sunday, 'Mo' for Monday, 'Tu' for Tuesday, 'We' for Wednesday, 'Th' for Thursday, 'Fr' for Friday and 'Sa' for Saturday. If you'd like to see the data for all the days type 'All' (Please only type the letters, ex: All): ").lower()
 
-    if iday == 'all':
-        df = df
-        print("\nThank you for your imput, all week days were selected")
-    elif iday == 'su':
-        df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-        print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-    elif iday == 'mo':
-        df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-        print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-    elif iday == 'tu':
-        df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-        print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-    elif iday == 'we':
-        df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-        print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-    elif iday == 'th':
-        df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-        print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-    elif iday == 'fr':
-        df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-        print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-    elif iday == 'sa':
-        df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-        print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-    else:
-        while iday != ('all' and 'su' and 'mo' and 'tu' and 'we' and 'th' and 'fr' and 'sa'):
+    iday = ''
+    while iday != 'all' and iday != 'su' and iday != 'mo' and iday != 'tu' and iday != 'we' and iday != 'th' and iday != 'fr' and iday != 'sa':
+        iday = input("\nSelect which day you'd like to see data for. Type 'Su' for Sunday, 'Mo' for Monday, 'Tu' for Tuesday, 'We' for Wednesday, 'Th' for Thursday, 'Fr' for Friday and 'Sa' for Saturday. If you'd like to see the data for all the days type 'All' (Please only type the letters, ex: All): ").lower()
+        if iday == 'su' and iday == 'mo' and iday == 'tu' and iday == 'we' and iday == 'th' and iday == 'fr' and iday == 'sa':
+            df = df[(df['day_of_week'] == DAYS_DATA[iday])]
+            print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
+            break
+        elif iday == 'all':
+            df = df
+            print("\nThank you for your imput, all week days were selected")
+        else:
             print("\nYour input isn't valid, please try again")
-            iday = input("\nSelect which day you'd like to see data for. Type 'Su' for Sunday, 'Mo' for Monday, 'Tu' for Tuesday, 'We' for Wednesday, 'Th' for Thursday, 'Fr' for Friday and 'Sa' for Saturday. If you'd like to see the data for all the days type 'All' (Please only type the letters, ex: All): ").lower()
-            if iday == 'all':
-                df = df
-                print("\nThank you for your imput, all week days were selected")
-            elif iday == 'su':
-                df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-                print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-            elif iday == 'mo':
-                df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-                print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-            elif iday == 'tu':
-                df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-                print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-            elif iday == 'we':
-                df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-                print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-            elif iday == 'th':
-                df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-                print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-            elif iday == 'fr':
-                df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-                print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-            elif iday == 'sa':
-                df = df[(df['day_of_week'] == DAYS_DATA[iday])]
-                print("\nThank you for your imput, the week day selected was: {}".format(DAYS_DATA[iday]))
-            else:
-                continue
+            continue
 
     print('-'*40)
     print('\nThank you for your input user. We are ready to start the analysis')
@@ -310,9 +213,9 @@ def display(df):
                 view_data = input('\nDo you wish to see 5 more rows?  Please type yes to confirm or no to refuse: ')
                 if view_data == 'no':
                     break
-                elif view_data != ('yes' and 'no'):
+                elif view_data != 'yes' and view_data != 'no':
                     print("\nYour input isn't valid, please try again")
-        elif view_data != ('yes' and 'no'):
+        elif view_data != 'yes' and view_data != 'no':
             print("\nYour input isn't valid, please try again")
             continue            
 
@@ -331,10 +234,10 @@ def main():
         if restart == 'yes':
             continue
         else:        
-            while restart != ('yes' and 'no'):
+            while restart != 'yes' and restart != 'no':
                 print("\nYour input isn't valid, please try again")
                 restart = input('\nWould you like to restart? Enter yes or no.\n').lower()
-                if restart == ('yes' or 'no'):
+                if restart == 'yes' or restart != 'no':
                     break
             if restart != 'yes':
                 print("\nThank you for your input!\nEnding program!")
