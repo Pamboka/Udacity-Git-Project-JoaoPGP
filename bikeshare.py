@@ -329,10 +329,21 @@ def main():
         display(df)
 
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
-            break
-
+        restart = input('\nWould you like to restart? Enter yes or no.\n').lower()
+        if restart == 'yes':
+            continue
+        else:        
+            while restart != ('yes' and 'no'):
+                print("\nYour input isn't valid, please try again")
+                restart = input('\nWould you like to restart? Enter yes or no.\n').lower()
+                if restart == ('yes' or 'no'):
+                    break
+            if restart != 'yes':
+                print("\nThank you for your input!\nEnding program!")
+                break
+            else:
+                print("\nThank you for your input!\nRestarting program!")
+                continue
 
 if __name__ == "__main__":
 	main()
